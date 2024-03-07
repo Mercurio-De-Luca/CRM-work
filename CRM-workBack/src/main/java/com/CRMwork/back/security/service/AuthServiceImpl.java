@@ -75,10 +75,15 @@ public class AuthServiceImpl implements AuthService {
         }
 
         User user = new User();
-        user.setName(registerDto.getName());
+        user.setNome(registerDto.getNome());
+        user.setCognome(registerDto.getCognome());
         user.setUsername(registerDto.getUsername());
+        user.setCitta(registerDto.getCitta());
+        user.setIndirizzo(registerDto.getIndirizzo());
+        user.setNomeAzienda(registerDto.getNomeAzienda());
         user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+        user.setPartitaIva(registerDto.getPartitaIva());
 
         Set<Role> roles = new HashSet<>();
         
@@ -88,7 +93,7 @@ public class AuthServiceImpl implements AuthService {
 	        	roles.add(userRole);
 	        });
         } else {
-        	Role userRole = roleRepository.findByRoleName(ERole.ROLE_USER).get();
+        	Role userRole = roleRepository.findByRoleName(ERole.ROLE_ADMIN).get();
         	roles.add(userRole);
         }
         
